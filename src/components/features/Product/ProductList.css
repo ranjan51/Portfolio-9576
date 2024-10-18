@@ -1,0 +1,82 @@
+.product-list-container {
+    margin: 20px 0;
+  }
+  
+  .product-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .category-title {
+    font-size: 18px;
+    font-weight: bold;
+    /* color: white; */
+  }
+  
+  .view-more {
+    color: red;
+    cursor: pointer;
+  }
+  
+  .product-list-horizontal {
+    display: flex;
+    overflow-x: auto;
+    padding-bottom: 10px;
+  }
+  
+  .product-list-horizontal::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+  }
+  
+  .product-card {
+    flex: 0 0 auto;
+    margin-right: 10px;
+    width: 180px; /* Set width to control card size */
+    max-height: 220px;
+    border-radius: 10px;
+    scroll-behavior: inherit;
+    overflow:hidden;
+    
+  }
+  
+  .product-card img {
+    /* height: 200px; */
+    /* object-fit: cover; */
+    max-height: 90px;
+  }
+  .ant-carousel {
+    margin: 0; /* Remove margin */
+  }
+  
+  .product-list-container {
+    margin: 0 auto; /* Center the container */
+    padding: 0; /* Remove padding */
+    max-width: 100%; /* Ensure it uses full width */
+  }
+  
+  .ant-card {
+    width: 100%; /* Ensure cards take full width of the column */
+    max-height: 290px;
+    min-height: 290px;
+  }
+  .YouTube{
+    border-radius: 10px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  }
+  /* styles.css */
+.gx-timeline-panel {
+  overflow: hidden; /* Prevent overflowing content */
+}
+
+.gx-card-profile {
+  padding: 16px; /* Ensure there's padding in the card */
+}
+ant-steps-vertical > .ant-steps-item .ant-steps-item-title {
+  line-height: 10px !important;
+}
+
+.gx-timeline-item {
+  margin-bottom: 16px; /* Add space between timeline items */
+}

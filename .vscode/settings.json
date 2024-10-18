@@ -1,0 +1,14 @@
+{
+	"appService.zipIgnorePattern": ["node_modules{,/**}", ".vscode{,/**}"],
+	"appService.showBuildDuringDeployPrompt": false,
+	"cSpell.words": [
+		"apexcharts",
+		"azurewebsites",
+		"endregion",
+		"ondemandpage",
+		"realtimedashboard",
+		"refreshtoken"
+	],
+	"appService.defaultWebAppToDeploy": "/subscriptions/a2258624-0f9b-457e-b6c5-ed79f40685d5/resourceGroups/NOC-G7CR-DEV-RG/providers/Microsoft.Web/sites/G7CR-NOC-UI-DEV",
+	"appService.deploySubpath": "build"
+}

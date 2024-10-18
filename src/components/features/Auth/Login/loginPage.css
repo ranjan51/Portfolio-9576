@@ -1,0 +1,189 @@
+
+
+.gx-layout-sider-scrollbar{
+  min-height: 100vh !important;
+}
+
+.loginMaindiv{
+   
+  
+   display: flex !important;
+   justify-content: center !important;
+   align-items: center !important;
+ 
+  background-image: url('data:image/jpeg;base64,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');
+  height: 100vh; 
+    background-size: cover;
+    background-position: center;
+  
+
+
+}
+
+
+
+.loginCard{
+     width: 50%;
+     height: 420px !important;
+     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+     background-color: white !important;
+     display: flex !important;
+}
+
+.loginheading{
+  font-size: 20px !important;
+  color: #697c97 !important;
+  margin-top: 30px !important;
+}
+
+.loginCardLeft{
+    width: 80%;
+    display: flex !important;
+    /* justify-content: center !important; */
+    align-items: center !important;
+    flex-direction: column !important;
+    margin-top: 6% !important;
+    
+}
+
+.loginCardRight {
+  /* background-color: #e4f5f4; */
+  /* height: 100%; */
+  display: flex;
+  flex-direction: column !important;
+  align-items: center;
+  justify-content: center !important;
+}
+
+@keyframes heartbeat {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.07);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  .loginlogo{
+    animation: heartbeat 4s infinite;
+  }
+
+  .loginimg {
+    width: 450px;
+    /* margin-top: 40px; */
+    height: 100%;
+    /* animation: heartbeat 4s infinite; Apply the heartbeat animation infinitely */
+  }
+
+.loginform{
+    display: flex;
+    width: 80%;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+}
+
+.logininps{
+    border: none !important;
+    background-color: #E8F0FE !important;
+    padding: 9px;
+    border-radius: 0px;
+    width: 100% !important;
+}
+
+.loginbtn{
+    background-color: #437def;
+    border: none !important;
+    color: white;
+    padding:0px;
+    cursor: pointer !important;
+    font-size: 13px;
+ width: 100%; 
+ transform: scale(1.1);
+ margin-top: 6px !important;
+}
+
+.loginbtn:hover{
+    /* transform: scale(1.2); */
+     transition: 0.4s;
+}
+
+
+
+.ant-form-item-explain-error{
+ color: red;
+ margin:8px 0px !important;
+}
+
+.loginFormCopyright{
+    color:#697c97 !important;
+    text-align: center !important;
+}
+
+
+.pieimgmotion {
+  position: absolute !important;
+  width: 170px;
+  left: -145px; 
+  top: 25px;
+  animation: slideFromLeft 2s ease-in-out forwards;
+  transform: rotate(-250deg); 
+
+}
+
+@keyframes slideFromLeft {
+  0% {
+    transform: translateX(-20px) rotate(-250deg);
+  }
+  100% {
+    transform: translateX(155px) rotate(0deg);
+  }
+}
+
+
+.todo3d {
+  position: absolute !important;
+  width: 140px;
+  right: 35px; 
+  bottom: 25px;
+  animation: moveRightToLeft 2s ease-in-out forwards;
+}
+
+@keyframes moveRightToLeft {
+  0% {
+    transform: translateX(155px) rotate(20deg);
+  }
+  100% {
+    transform: translateX(5px) rotate(0deg);
+  }
+}
+
+
+
+
+@media only screen and (max-width: 1000px) {
+      .loginCardRight{
+        display:none;
+      }
+
+
+      .loginCardLeft{
+        width: 100% !important;
+        justify-content: center;
+      }
+
+      .loginFormCopyright{
+        font-size: 12px !important;
+      }
+
+      .loginheading{
+        font-size: 14px !important;
+      }
+      .loginCard{
+        height: 400px !important;
+        width: 80% !important;
+      }
+  }
