@@ -23,32 +23,32 @@ const About = () => {
             <AboutItem data={about} />
           </Col>
         ));
-      case "2":
-        return (
-          <Col key={1} xs={24}>
-            <Steps
-              direction="vertical"
-              current={1}
-              style={{ paddingRight: 10 }} // Ensure content doesn't overflow horizontally
-            >
-              <Steps.Step
-                title="G7CR Technology"
-                description="Software Engineer -1"
-                icon={<img height={25} src={"/assets/images/current-account.png"} />}
-              />
-              <Steps.Step
-                title="G7CR Technology"
-                description="Software Engineer Trainee"
-                icon={<img height={25} src={"/assets/images/pending-tasks.png"} />}
-              />
-              {/* <Steps.Step
-                title="Internshala"
-                description="UI/UX Designer"
-                icon={<img height={25} src={"/assets/images/start-line.png"} />}
-              /> */}
-            </Steps>
-          </Col>
-        );
+      // case "2":
+      //   return (
+      //     <Col key={1} xs={24}>
+      //       <Steps
+      //         direction="vertical"
+      //         current={1}
+      //         style={{ paddingRight: 10 }} // Ensure content doesn't overflow horizontally
+      //       >
+      //         <Steps.Step
+      //           title="Yayawari Group"
+      //           description="Content Writer"
+      //           icon={<img height={25} src={"/assets/images/current-account.png"} />}
+      //         />
+      //         <Steps.Step
+      //           title="Yayawari Group"
+      //           description="Content Writer"
+      //           icon={<img height={25} src={"/assets/images/pending-tasks.png"} />}
+      //         />
+      //         {/* <Steps.Step
+      //           title="Internshala"
+      //           description="UI/UX Designer"
+      //           icon={<img height={25} src={"/assets/images/start-line.png"} />}
+      //         /> */}
+      //       </Steps>
+      //     </Col>
+      //   );
       case "3":
         return (
           <Col key={1} xs={24}>
@@ -61,30 +61,30 @@ const About = () => {
              title={
               <div style={{ display: "flex", flexDirection: "column" }}>
                 <div style={{ display: "flex", alignItems: "center" }}>
-                  <span style={{ marginRight: "8px" }}>MCA</span>
-                  <p style={{ margin: 0, fontSize: "small", lineHeight: "1.5" }} className="gx-fs-sm gx-text-grey">
+                  <span style={{ marginRight: "8px" }}>Hindi sahitya (BA)</span>
+                  {/* <p style={{ margin: 0, fontSize: "small", lineHeight: "1.5" }} className="gx-fs-sm gx-text-grey">
                     2021-2023
-                  </p>
+                  </p> */}
                 </div>
               </div>
             }
-              description={<p>BMS institute of Technology</p>}
+              description={<p>Indira Gandhi Open University</p>}
               icon={<img height={25} src={"/assets/images/certificate.png"} />}
             />
             <Steps.Step
        title={
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ display: "flex", alignItems: "center" }}>
-            <span style={{ marginRight: "8px" }}>BCA</span>
-            <p style={{ margin: 0, fontSize: "small", lineHeight: "1.5" }} className="gx-fs-sm gx-text-grey">
+            <span style={{ marginRight: "0px" }}>intermediate of science (ISC)</span>
+            {/* <p style={{ margin: 0, fontSize: "small", lineHeight: "1.5" }} className="gx-fs-sm gx-text-grey">
               2021-2023
-            </p>
+            </p> */}
           </div>
         </div>
       }
       
         
-              description="Software Engineer Trainee"
+              description="B.S.E.B (Bihar Board Patna)"
               icon={<img height={25} src={"/assets/images/graduation-hat.png"} />}
             />
           </Steps>
@@ -114,9 +114,9 @@ const About = () => {
         <TabPane tab="Overview" key="1">
           <Row gutter={[16, 16]}>{renderTabContent()}</Row>
         </TabPane>
-        <TabPane tab="Work" key="2">
+        {/* <TabPane tab="Work" key="2">
           <Row gutter={[16, 16]}>{renderTabContent()}</Row>
-        </TabPane>
+        </TabPane> */}
         <TabPane tab="Education" key="3">
           <Row gutter={[16, 16]}>{renderTabContent()}</Row>
         </TabPane>

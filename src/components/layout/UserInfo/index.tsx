@@ -51,11 +51,11 @@ const UserInfo = () => {
 		<ul className="gx-user-popover">
 			<li style={{ display: 'flex', alignItems: 'center', width: '100%', gap: '5px' }}>
 				{/* <SiNamecheap size={18} /> {'Sonu Kishor'} */}
-				<SiNamecheap size={18} /> {'Ranjan Kishor'}
+				<SiNamecheap size={18} /> {'Sonu Kishor'}
 			</li>
 			<li style={{ display: 'flex', alignItems: 'center', width: '100%', gap: '5px' }}>
-				{/* <MdEmail size={18} /> {'SonuKishor@gmail.com '} */}
-				<MdEmail size={18} /> {'Ranjankishor83@gmail.com '}
+				<MdEmail size={18} /> {'sonuyadav957670@gmail.com'}
+				{/* <MdEmail size={18} /> {'Ranjankishor83@gmail.com '} */}
 			</li>
 			{/* <li style={{ display: 'flex', alignItems: 'center', width: '100%', gap: '5px' }}>
 				<MdAdminPanelSettings size={18} /> {'Dummy Admin'}
@@ -80,7 +80,8 @@ const UserInfo = () => {
 			visible={visible}
 			onVisibleChange={setVisible}
 		>
-			<Avatar src={"/assets/images/Mypic.png.jpeg"} className="gx-avatar gx-pointer" alt="" style={{ width: '40px', height: '40px' }} />
+			{/* <Avatar src={"/assets/images/Mypic.png.jpeg"} className="gx-avatar gx-pointer" alt="" style={{ width: '40px', height: '40px' }} /> */}
+			<Avatar src={"/assets/images/sonukishordp.png"} className="gx-avatar gx-pointer" alt="" style={{ width: '40px', height: '40px' }} />
 			{/* <Avatar src="/assets/images/sonukishordp.png" className="gx-avatar gx-pointer" alt="" style={{ width: '40px', height: '40px' }} /> */}
 		</Popover>
 	);

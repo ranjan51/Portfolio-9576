@@ -19,26 +19,22 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const getYouTubeVideoId = (videoLink: string) => {
+const getYouTubeVideoId = (videoLink:any) => {
   const regExp = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([^&\n?#]+)/;
   const match = videoLink.match(regExp);
   return match ? match[1] : null;
 };
 
-// Placeholder function for Instagram thumbnail
-const getInstagramThumbnail = () => {
-  return "https://via.placeholder.com/150"; // Replace with actual logic for fetching Instagram thumbnails
-};
-
 const Friends = () => {
-  const [videoList, setVideoList] = useState<any[]>([]);
+  const [videoList, setVideoList] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedVideo, setSelectedVideo] = useState<any>(null);
+  console.log("videoList",videoList)
 
   const fetchVideoData = async () => {
     try {
       const querySnapshot = await getDocs(collection(db, "videos"));
-      const videos: any[] = [];
+      const videos:any = [];
       querySnapshot.forEach((doc) => {
         videos.push(doc.data());
       });
@@ -52,7 +48,7 @@ const Friends = () => {
     fetchVideoData();
   }, []);
 
-  const showModal = (video: any) => {
+  const showModal = (video:any) => {
     setSelectedVideo(video);
     setIsModalVisible(true);
   };
@@ -61,46 +57,47 @@ const Friends = () => {
     setIsModalVisible(false);
     setSelectedVideo(null);
   };
+  
+  // Generate a unique key based on selectedVideo or isModalVisible
+  const iframeKey = isModalVisible ? selectedVideo?.videoLink : Date.now();
 
   return (
     <>
-     <Card
-  className="YouTube"
-  style={{ overflowY: "auto" }}
-  title={
-    <Row>
-      <Col xs={24} sm={24} md={12} lg={17} xl={12}>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            fontSize: "14px",
-            fontWeight: "500",
-            justifyContent: "flex-start", // Left align text for small screens
-          }}
-        >
-          <CiYoutube className=" gx-link" size={23} />
-          <span style={{ marginLeft: "10px" }}>
-            My YouTube and Instagram Videos
-          </span>
-        </div>
-      </Col>
-    </Row>
-  }
->
-
-        <Row >
-          {videoList.map((user, index) => (
-            <Col style={{padding:"3px"}} key={index} >
+      {/* <Card
+        className="YouTube"
+        style={{ overflowY: "auto" }}
+        title={
+          <Row>
+            <Col xs={24} sm={24} md={12} lg={17} xl={12}>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  fontSize: "14px",
+                  fontWeight: "500",
+                  justifyContent: "flex-start",
+                }}
+              >
+                <CiYoutube className=" gx-link" size={23} />
+                <span style={{ marginLeft: "10px" }}>
+                  My YouTube and Instagram Videos
+                </span>
+              </div>
+            </Col>
+          </Row>
+        }
+      >
+        <Row>
+          {videoList.map((video:any, index:any) => (
+            <Col style={{ padding: "3px" }} key={index}>
               <div
                 className="gx-user-fnd"
-                onClick={() => showModal(user)}
+                onClick={() => showModal(video)}
                 style={{
-                  marginBottom:"10px",
+                  marginBottom: "10px",
                   cursor: "pointer",
                   border: "1px solid #f0f0f0",
                   borderRadius: "8px",
-                  // padding: "10px",
                   boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
                   transition: "transform 0.3s ease",
                 }}
@@ -112,25 +109,24 @@ const Friends = () => {
                 }
               >
                 <img
-                  alt={user.name}
+                  alt={video.name}
                   src={
-                    user.platform === "YouTube"
+                    video.platform === "YouTube"
                       ? `https://img.youtube.com/vi/${getYouTubeVideoId(
-                          user.videoLink
+                          video.videoLink
                         )}/hqdefault.jpg`
-                      : getInstagramThumbnail()
+                      : video.thumbnailUrl // Use the uploaded Instagram thumbnail URL
                   }
                   style={{
                     width: "100%",
-                    height: "120px", // Fixed height for consistency
+                    height: "120px",
                     objectFit: "cover",
                     borderRadius: "5px",
                   }}
                 />
-                <div className="gx-user-fd-content" style={{padding:"5px", marginTop: "10px" }}>
-                  <div style={{display:"flex"}}>
-
-                  <div
+                <div className="gx-user-fd-content" style={{ padding: "5px", marginTop: "10px" }}>
+                  <div style={{ display: "flex" }}>
+                    <div
                       className="gx-status-pos"
                       style={{
                         marginRight: "5px",
@@ -146,19 +142,19 @@ const Friends = () => {
                         ></span>
                       </div>
                     </div>
-                  <h6
-                    style={{
-                      fontWeight: "bold",
-                      fontSize: "14px",
-                      whiteSpace: "nowrap",
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                      marginBottom: "5px",
-                    }}
-                    title={user.name}
-                  >
-                    {user.name}
-                  </h6>
+                    <h6
+                      style={{
+                        fontWeight: "bold",
+                        fontSize: "14px",
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        marginBottom: "5px",
+                      }}
+                      title={video.name}
+                    >
+                      {video.name}
+                    </h6>
                   </div>
                   <p
                     style={{
@@ -168,11 +164,106 @@ const Friends = () => {
                       overflow: "hidden",
                       textOverflow: "ellipsis",
                     }}
-                    title={user.title}
+                    title={video.title}
                   >
-                    {user.title}
+                    {video.title}
                   </p>
-                  
+                </div>
+              </div>
+            </Col>
+          ))}
+        </Row>
+      </Card> */}
+      <Card
+        className="YouTube"
+        style={{ overflowY: "auto" }}
+        title={
+          <Row>
+            <Col xs={24} sm={24} md={12} lg={17} xl={12}>
+              <div
+               style={{
+                display: "flex",
+                alignItems: "center",
+                fontSize: "14px",
+                fontWeight: "500",
+                justifyContent: "flex-start",
+              }}
+              >
+                <CiYoutube className="gx-link" size={23} />
+                <span style={{ marginLeft: "10px" }}>
+                  My YouTube and Instagram Videos
+                </span>
+              </div>
+            </Col>
+          </Row>
+        }
+      >
+        <Row gutter={[16, 16]}>
+          {videoList.map((video:any, index:any) => (
+            <Col xs={24} sm={12} md={8} lg={24} key={index}>
+              <div
+                className="gx-user-fnd"
+                onClick={() => showModal(video)}
+                style={{
+                  marginBottom: "10px",
+                  cursor: "pointer",
+                  border: "1px solid #f0f0f0",
+                  borderRadius: "8px",
+                  boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+                  transition: "transform 0.3s ease",
+                  overflow: "hidden",
+                }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.transform = "scale(1.05)")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.transform = "scale(1)")
+                }
+              >
+                <img
+                  alt={video.name}
+                  src={
+                    video.platform === "YouTube"
+                      ? `https://img.youtube.com/vi/${getYouTubeVideoId(
+                          video.videoLink
+                        )}/hqdefault.jpg`
+                      : video.imageUrl || video.thumbnailUrl
+                  }
+                  style={{
+                    width: "100%",
+                    height: "120px",
+                    objectFit: "cover",
+                  }}
+                />
+                <div
+                  className="gx-user-fd-content"
+                  style={{ padding: "8px", backgroundColor: "#fff" }}
+                >
+                  <h6
+                    style={{
+                      fontWeight: "bold",
+                      fontSize: "14px",
+                      whiteSpace: "nowrap",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      marginBottom: "5px",
+                    }}
+                    title={video.name}
+                  >
+                    {video.name}
+                  </h6>
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      color: "#888",
+                      whiteSpace: "nowrap",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                    }}
+                    title={video.title}
+                  >
+                    {video.title}
+                  </p>
                 </div>
               </div>
             </Col>
@@ -182,43 +273,42 @@ const Friends = () => {
 
       {/* Modal for displaying video */}
       <Modal
-        title={selectedVideo?.title}
-        visible={isModalVisible}
-        onCancel={handleCancel}
-        footer={null}
-        centered
-        width={800}
-      >
-        {selectedVideo && (
-          <div style={{ textAlign: "center" }}>
-            {selectedVideo.platform === "YouTube" ? (
-              <iframe
-                width="100%"
-                height="450"
-                src={`https://www.youtube.com/embed/${getYouTubeVideoId(
-                  selectedVideo.videoLink
-                )}`}
-                title={selectedVideo.title}
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
-            ) : (
-              <iframe
-                width="100%"
-                height="450"
-                src={`https://www.instagram.com/p/${
-                  selectedVideo.videoLink.split("/")[4]
-                }/embed`}
-                title={selectedVideo.title}
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
-            )}
-          </div>
-        )}
-      </Modal>
+  title={selectedVideo?.title}
+  visible={isModalVisible}
+  onCancel={handleCancel}
+  footer={null}
+  centered
+  width={800}
+>
+  {selectedVideo && (
+    <div style={{ textAlign: "center" }}>
+      {selectedVideo.platform === "YouTube" ? (
+        <iframe
+          key={iframeKey}  // Use key to force remount
+          width="100%"
+          height="450"
+          src={`https://www.youtube.com/embed/${getYouTubeVideoId(selectedVideo.videoLink)}`}
+          title={selectedVideo.title}
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        ></iframe>
+      ) : (
+        <iframe
+          key={iframeKey}  // Use key to force remount
+          width="100%"
+          height="450"
+          src={`https://www.instagram.com/p/${selectedVideo.videoLink.split("/")[4]}/embed`}
+          title={selectedVideo.title}
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        ></iframe>
+      )}
+    </div>
+  )}
+</Modal>
+
     </>
   );
 };

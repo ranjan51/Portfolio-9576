@@ -16,20 +16,32 @@ const truncateText = (text: string, maxLength: number) => {
 };
 
 const MostPopularQuotes: React.FC = () => {
-  const [quotes, setQuotes] = useState<any[]>([]); // Changed to quotes for all categories
+  const [quotes, setQuotes] = useState<any[]>([]); // Popular quotes state
+  const [recentQuotes, setRecentQuotes] = useState<any[]>([]); // Recent quotes state
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedQuote, setSelectedQuote] = useState<any>(null);
 
+  // Fetch quotes from Firestore
   const fetchProducts = async () => {
     try {
-      const querySnapshot = await getDocs(collection(firestore, 'products'));
+      const querySnapshot = await getDocs(collection(firestore, 'quotes'));
       const productsArray = querySnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
 
-      // Set quotes array to all fetched products
-      setQuotes(productsArray);
+      // Filter popular quotes
+      const popularQuotes = productsArray.filter((quote: any) => quote.categories === 'Popular');
+      setQuotes(popularQuotes);
+
+      // Sort by createdAt to get recent quotes
+      const recentQuotes = productsArray.sort((a: any, b: any) => {
+        const dateA = new Date(a.createdAt).getTime();  // Convert to timestamp (milliseconds)
+        const dateB = new Date(b.createdAt).getTime();  // Convert to timestamp (milliseconds)
+        return dateB - dateA;  // Sort by most recent
+      });
+      
+      setRecentQuotes(recentQuotes);
     } catch (error) {
       console.error('Error fetching products:', error);
       message.error('Failed to fetch products');
@@ -37,27 +49,32 @@ const MostPopularQuotes: React.FC = () => {
   };
 
   useEffect(() => {
-    fetchProducts(); // Fetch products on component mount
+    fetchProducts(); // Fetch quotes on component mount
   }, []);
 
-  // Function to render the carousel of English quotes
+  // Render carousel for quotes (Popular and Recent)
   const renderQuotesCarousel = () => {
     const cards = [];
 
-    // Group quotes into pairs for displaying two per card
+    // Group popular quotes into pairs for displaying two per card
     for (let i = 0; i < quotes.length; i += 2) {
       cards.push(quotes.slice(i, i + 2));
     }
 
-    return (
+    const recentCards = [];
 
-      
+    // Group recent quotes into pairs for displaying two per card
+    for (let i = 0; i < recentQuotes.length; i += 2) {
+      recentCards.push(recentQuotes.slice(i, i + 2));
+    }
+
+    return (
       <>
-        <div style={{display:"flex",alignItems:"center",marginBottom:"5px"}}>
-      <img src="/assets/images/most popular.gif" alt={"MostPopular.gif"} style={{ width: 40, height: 40, marginRight: 5 }} />
-    
-        <p style={{ marginBottom: "3px" }} className="category-title">Popular Quotes</p>
-      </div>
+        {/* Popular Quotes Carousel */}
+        <div style={{ display: "flex", alignItems: "center", marginBottom: "5px" }}>
+          <img src="/assets/images/most popular.gif" alt="MostPopular.gif" style={{ width: 40, height: 40, marginRight: 5 }} />
+          <p style={{ marginBottom: "3px" }} className="category-title">Popular Quotes</p>
+        </div>
         <Carousel autoplay>
           {cards.map((pair, index) => (
             <div key={index}>
@@ -65,18 +82,14 @@ const MostPopularQuotes: React.FC = () => {
                 {pair.map((quote: any) => (
                   <Col key={quote.id} xs={12} sm={12} md={12} lg={8}>
                     <Card
-                      
-                      style={{ width: '100%' }} // Ensure full width
-                      cover={<img width="100%" style={{maxHeight:"120px",minHeight:"120px"}}  alt={quote.name} src={quote.imageUrl} />}
+                      style={{ width: '100%' }}
+                      cover={<img width="100%" style={{ maxHeight: "120px", minHeight: "120px" }} alt={quote.name} src={quote.imageUrl} />}
                       onClick={() => {
                         setSelectedQuote(quote);
                         setIsModalVisible(true);
                       }}
                     >
-                      <Meta
-                        title={truncateText(quote.title, 16)} // Truncate title to 16 characters
-                        description={truncateText(quote.name, 50)} // Truncate description to 50 characters
-                      />
+                      <Meta title={truncateText(quote.title, 16)} description={truncateText(quote.name, 50)} />
                     </Card>
                   </Col>
                 ))}
@@ -84,42 +97,34 @@ const MostPopularQuotes: React.FC = () => {
             </div>
           ))}
         </Carousel>
-      </>
-    );
-  };
 
-  // Function to render the most recent quotes section
-  const renderRecentQuotes = () => {
-    // Take the first 10 quotes from the quotes array
-    const recentQuotes = quotes.slice(0, 10);
-
-    return (
-      <>
-      <div style={{display:"flex",alignItems:"center",marginBottom:"5px"}}>
-      <img src="/assets/images/MostPopular-unscreen.gif" alt={"MostPopular.gif"} style={{ width: 40, height: 40, marginRight: 5 }} />
-    
-        <Text style={{ marginBottom: "3px" }} className="category-title">Most Recent Quotes</Text>
-      </div>
-        <Row gutter={[16, 16]}>
-          {recentQuotes.map((quote: any) => (
-            <Col key={quote.id}xs={12} sm={12} md={12} lg={8}>
-              <Card
-                hoverable
-                style={{ width: '100%' }} // Ensure full width
-                cover={<img style={{maxHeight:"120px",minHeight:"120px"}} width="100%" alt={quote.name} src={quote.imageUrl} />}
-                onClick={() => {
-                  setSelectedQuote(quote);
-                  setIsModalVisible(true);
-                }}
-              >
-                <Meta
-                  title={truncateText(quote.title, 16)} // Truncate title to 16 characters
-                  description={truncateText(quote.name, 50)} // Truncate description to 50 characters
-                />
-              </Card>
-            </Col>
+        {/* Recent Quotes Carousel */}
+        <div style={{ display: "flex", alignItems: "center", marginBottom: "5px" }}>
+          <img src="/assets/images/MostPopular-unscreen.gif" alt="Recent.gif" style={{ width: 40, height: 40, marginRight: 5 }} />
+          <p style={{ marginBottom: "3px" }} className="category-title">Recent Quotes</p>
+        </div>
+        <Carousel autoplay>
+          {recentCards.map((pair, index) => (
+            <div key={index}>
+              <Row gutter={[16, 16]}>
+                {pair.map((quote: any) => (
+                  <Col key={quote.id} xs={12} sm={12} md={12} lg={8}>
+                    <Card
+                      style={{ width: '100%' }}
+                      cover={<img width="100%" style={{ maxHeight: "120px", minHeight: "120px" }} alt={quote.name} src={quote.imageUrl} />}
+                      onClick={() => {
+                        setSelectedQuote(quote);
+                        setIsModalVisible(true);
+                      }}
+                    >
+                      <Meta title={truncateText(quote.title, 16)} description={truncateText(quote.name, 50)} />
+                    </Card>
+                  </Col>
+                ))}
+              </Row>
+            </div>
           ))}
-        </Row>
+        </Carousel>
       </>
     );
   };
@@ -140,23 +145,20 @@ const MostPopularQuotes: React.FC = () => {
   return (
     <div className="product-list-container">
       {/* Render quotes in carousel */}
-      {quotes.length > 0 && renderQuotesCarousel()}
+      {renderQuotesCarousel()}
 
-      {/* Render Most Recent Quotes */}
-      {quotes.length > 0 && renderRecentQuotes()}
-
-      {/* Modal for displaying selected quote */}
+      {/* Modal to display quote details */}
       {selectedQuote && (
         <Modal
-          title={modalTitle} // Use the custom title
+          title={modalTitle}
           visible={isModalVisible}
           onCancel={handleModalClose}
-          footer={null} // You can customize footer if needed
-          style={{ top: 30 }}
+          footer={null}
+          style={{ top: 20 }}
         >
-          <p><strong>Title:</strong> {selectedQuote.title}</p>
-          <p><strong>Description:</strong> {selectedQuote.name}</p>
-          <img src={selectedQuote.imageUrl} alt={selectedQuote.name} style={{ width: '100%' }} />
+          <div>
+            <Text>{selectedQuote.name}</Text>
+          </div>
         </Modal>
       )}
     </div>

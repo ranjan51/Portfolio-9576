@@ -1,10 +1,12 @@
 import React from "react";
 import Widget from "./widget";
 import { contactList } from "./data";
+import { motion } from "framer-motion";
 
 
 const Contact = () => {
   return (
+    <motion.div initial={{ y: 200, opacity: 0.5 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6, ease: 'easeInOut' }}>
     <Widget  styleName="gx-card-profile-sm">
        <div style={{display:"flex",alignItems:"center"}}>
 <img className="gx-mb-3" height={35} width={35}  src={"/assets/images/contactInfo.gif"} />
@@ -22,6 +24,7 @@ const Contact = () => {
         </div>
       )}
     </Widget>
+    </motion.div>
   )
 }
 

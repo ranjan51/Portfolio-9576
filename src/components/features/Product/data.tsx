@@ -10,13 +10,13 @@ export const aboutList = [
       icon: 'birthday-new',
       userList: '',
       // desc: ['Jan 31, 1997']
-      desc: ['May 08, 2001']
+      desc: ['Jan 07, 1998']
     },
     
     {
       id: 4,
       // title: 'Lives in Gorakhpur',
-      title: 'Lives in Bengaluru',
+      title: 'Lives in Patna (Bihar)',
       icon: 'home',
       userList: '',
       desc: ['From Bihar']
@@ -97,19 +97,21 @@ export const contactList = [
     id: 1,
     title: 'Email',
     icon: 'email',
-    desc: [<span className="gx-link" key={1}>Ranjankishor83@gmail.com</span>]
+    desc: [<span className="gx-link" key={1}>sonuyadav957670@gmail.com</span>]
+    // desc: [<span className="gx-link" key={1}>Ranjankishor83@gmail.com</span>]
   },
   {
     id: 2,
     title: 'Web page',
     icon: 'link',
-    desc: [<span className="gx-link" key={2}>https://ranjankishormca.vercel.app/</span>]
+    desc: [<span className="gx-link" key={2}>https://sonu-kishor.netlify.app/</span>]
+    // desc: [<span className="gx-link" key={2}>https://ranjankishormca.vercel.app/</span>]
   }, {
     id: 3,
     title: 'Phone',
     icon: 'phone',
-    // desc: ['+91-7003584601']
-    desc: ['+91-9661916051']
+    desc: ['+91-7004462738']
+    // desc: ['+91-9661916051']
   },
 ];
 

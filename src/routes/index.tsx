@@ -29,7 +29,9 @@ const AppRoutes = () => {
 			},
 			{
 				path: '/',
-				element: <MostPopularQuotes />
+				element: 					<AllQuotes/>
+
+				// element: <MostPopularQuotes />
 			},
 		
 		]
